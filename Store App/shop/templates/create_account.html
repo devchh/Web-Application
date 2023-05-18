@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block navbar %}
+    <nav class="navbar navbar-dark bg-dark" role="navigation">
+        <div class="container">
+		<a class="navbar-brand" href="{{ url_for('index') }}">Home</a>
+		<a class="navbar-brand" href="{{ url_for('cart') }}">Cart</a>
+		<a class="navbar-brand" href="{{ url_for('login') }}">Login</a>
+	    <a class="navbar-brand" href="{{ url_for('create_account') }}">Create Account</a>
+		<a class="navbar-brand" href="{{ url_for('profile') }}">Profile</a>
+        </div>
+    </nav>
+{% endblock %}
+
+{% block content %}
+<div class="text-center h1 text-danger"> Register</div>
+<div class="container">
+	{% from "_formhelpers.html" import render_field %}
+	<form method=post enctype="multipart/form-data">
+		<div class="form-group">
+			{{ render_field(form.username, class="form-control") }}
+			{{ render_field(form.email, class="form-control") }}
+			{{ render_field(form.password, class="form-control") }}
+			{{ render_field(form.confirm, class="form-control") }}
+			{{ render_field(form.profile_pic, class="form-control") }}
+		</div>
+		<p><input type=submit value="Create account" class="btn btn-primary"></p>
+	</form>
+</div>
+{% endblock %}

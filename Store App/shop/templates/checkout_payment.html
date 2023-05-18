@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}bikers_R_us{% endblock %}
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+{% endblock %}
+
+
+{% block navbar %}
+    <nav class="navbar navbar-dark bg-dark" role="navigation">
+        <div class="container">
+		<a class="navbar-brand" href="{{ url_for('index') }}">Home</a>
+		<a class="navbar-brand" href="{{ url_for('cart') }}">Cart</a>
+		<a class="navbar-brand" href="{{ url_for('login') }}">Login</a>
+	    <a class="navbar-brand" href="{{ url_for('create_account') }}">Create Account</a>
+		<a class="navbar-brand" href="{{ url_for('profile') }}">Profile</a>
+        </div>
+    </nav>
+{% endblock %}
+
+{% block content %}
+<div class="text-center h1 text-danger"> Please make a Payment</div>
+<div class="container">
+	{% from "_formhelpers.html" import render_field %}
+	<form method=post enctype="multipart/form-data">
+		{{ render_field(form.card_number, class="form-control", placeholder="16 Digit Number") }}
+		{{ render_field(form.name_on_card, class="form-control", placeholder="Full Name") }}
+		{{ render_field(form.expiry_date, class="form-control", placeholder = "MM/YY") }}
+		{{ render_field(form.csv, class="form-control", placeholder="3 Digit Code on the back of your card.") }}
+
+		<a href="/checkout/shipping" class="btn btn-primary">Return to Shipping</a>
+		<input type=submit value="Pay" class="btn btn-primary">
+	</form>
+</div>
+{% endblock %}
